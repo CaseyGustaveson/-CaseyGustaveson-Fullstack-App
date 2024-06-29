@@ -1,12 +1,14 @@
 {
   "name": "@caseygustaveson/test-app",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "index.js",
-  "publishConfig":{"access": "public"},
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
-    "generate":"npx prisma generate",
+    "generate": "npx prisma generate",
     "postinstall": "npm run generate",
-    "release":"standard-version"
+    "release": "standard-version"
   },
   "keywords": [],
   "author": "",
@@ -19,5 +21,7 @@
     "prisma": "^5.16.1",
     "standard-version": "^9.5.0"
   },
-  "peerDependencies": {"@prisma/client": "5.16.1"}
+  "peerDependencies": {
+    "@prisma/client": "5.16.1"
+  }
 }
