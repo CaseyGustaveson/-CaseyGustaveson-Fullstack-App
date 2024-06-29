@@ -23,5 +23,8 @@
   },
   "peerDependencies": {
     "@prisma/client": "5.16.1"
+  },
+  "dependencies": {
+    "@caseygustaveson/test-app": "^1.0.0"
   }
 }
