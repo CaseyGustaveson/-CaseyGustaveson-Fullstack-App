@@ -15,8 +15,10 @@ jobs:
         with:
           node-version: 20  # Specifies the Node.js version
 
-      - name: Install dependencies
-        run: npm ci  # Installs project dependencies using npm
+      - name: Clean install dependencies
+        run: |
+          rm -rf node_modules
+          npm ci  # Installs project dependencies using npm
 
       - name: Install Prisma Binaries
         run: npx prisma generate  # Installs Prisma binaries
@@ -39,8 +41,10 @@ jobs:
         with:
           node-version: 20  # Specifies the Node.js version
 
-      - name: Install dependencies
-        run: npm ci  # Installs project dependencies using npm
+      - name: Clean install dependencies
+        run: |
+          rm -rf node_modules
+          npm ci  # Installs project dependencies using npm
 
       - name: Install Prisma Binaries
         run: npx prisma generate  # Installs Prisma binaries
