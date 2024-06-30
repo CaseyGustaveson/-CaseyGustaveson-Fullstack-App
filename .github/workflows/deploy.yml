@@ -8,7 +8,8 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest  # Specifies the runner environment
     steps:
-      - uses: actions/checkout@v4  # Checks out the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4  # Checks out the repository
 
       - name: Use Node.js 20
         uses: actions/setup-node@v4  # Sets up Node.js 20
@@ -21,7 +22,8 @@ jobs:
           npm ci  # Installs project dependencies using npm
 
       - name: Install Prisma Binaries
-        run: npx prisma generate  # Installs Prisma binaries
+        run: |
+          npx prisma generate  # Generates Prisma binaries
 
   publish:
     needs: build-and-test  # Runs this job after the build-and-test job
@@ -34,7 +36,8 @@ jobs:
       pull-requests: write
       id-token: write
     steps:
-      - uses: actions/checkout@v4  # Checks out the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4  # Checks out the repository
 
       - name: Use Node.js 20
         uses: actions/setup-node@v4  # Sets up Node.js 20
@@ -47,7 +50,8 @@ jobs:
           npm ci  # Installs project dependencies using npm
 
       - name: Install Prisma Binaries
-        run: npx prisma generate  # Installs Prisma binaries
+        run: |
+          npx prisma generate  # Generates Prisma binaries
 
       - name: Configure Git
         run: |
@@ -63,11 +67,16 @@ jobs:
         run: |
           git push --follow-tags origin main
 
-      - name: Authenticate and Publish
-        run: |
-          echo "//registry.npmjs.org:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-          cat ~/.npmrc  # Debug step to check .npmrc content
-          npm whoami  # Debug step to check npm authentication
-          npm publish
+      - name: Authenticate with npm
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
+      - name: Verify .npmrc content
+        run: cat ~/.npmrc
+
+      - name: Check npm authentication
+        run: npm whoami
+
+      - name: Publish to npm registry
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}  # Sets the npm token environment variable
