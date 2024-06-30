@@ -18,6 +18,9 @@ jobs:
       - name: Install dependencies
         run: npm ci  # Installs project dependencies using npm
 
+      - name: Install Prisma Binaries
+        run: npx prisma generate  # Installs Prisma binaries
+
   publish:
     needs: build-and-test  # Runs this job after the build-and-test job
     runs-on: ubuntu-latest  # Specifies the runner environment
@@ -39,6 +42,9 @@ jobs:
       - name: Install dependencies
         run: npm ci  # Installs project dependencies using npm
 
+      - name: Install Prisma Binaries
+        run: npx prisma generate  # Installs Prisma binaries
+
       - name: Configure Git
         run: |  # Configures Git with the user's email and name
           git config --global user.email "${{ secrets.GIT_USER_EMAIL }}"
@@ -57,6 +63,7 @@ jobs:
         run: |  # Authenticates with npm and publishes the package
           echo "//registry.npmjs.org:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
           cat ~/.npmrc  # Debug step to check .npmrc content
+          npm whoami  # Debug step to check npm authentication
           npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}  # Sets the npm token environment variable
