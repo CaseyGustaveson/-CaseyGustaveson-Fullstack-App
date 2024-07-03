@@ -5,12 +5,14 @@
   "publishConfig": {
     "access": "public"
   },
+
   "scripts": {
     "generate": "npx prisma generate",
     "postinstall": "npx prisma generate",
     "release": "standard-version",
     "dev": "nodemon server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "seed": "node /seed.js"
   },
   "keywords": [],
   "author": "",
