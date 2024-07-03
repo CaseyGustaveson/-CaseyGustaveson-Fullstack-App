@@ -1,11 +1,10 @@
 {
   "name": "@caseygustaveson/test-app",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "main": "index.js",
   "publishConfig": {
     "access": "public"
   },
-
   "scripts": {
     "generate": "npx prisma generate",
     "postinstall": "npx prisma generate",
